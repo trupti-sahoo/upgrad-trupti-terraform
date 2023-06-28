@@ -1,6 +1,5 @@
-module "app_sg1" {
+module "app" {
   source = "terraform-aws-modules/security-group/aws"
-
   name        = "application"
   description = "opening all ports"
   vpc_id      = module.vpc.vpc_id
@@ -24,7 +23,7 @@ resource "aws_instance" "Apps_host" {
   instance_type = "t3.small"
   key_name      = "terraform"
   subnet_id     = module.vpc.private_subnets[1]
-  vpc_security_group_ids = [module.app_sg1.security_group_id]
+  vpc_security_group_ids = [module.app.security_group_id]
 
 
   tags = {
